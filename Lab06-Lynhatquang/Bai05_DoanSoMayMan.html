@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 5. Đoán số may mắn</title>
+  <style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 32px 16px; font-family: Arial, sans-serif;
+  background: #f3f6fb; color: #202938;
+}
+main {
+  width: min(100%, 620px); margin: 0 auto; padding: 28px;
+  background: white; border-radius: 16px; box-shadow: 0 8px 28px #182c4a14;
+}
+h1 { margin-top: 0; font-size: 26px; color: #174ea6; }
+p { line-height: 1.5; }
+label { display: block; margin: 14px 0 6px; font-weight: 600; }
+input, select {
+  width: 100%; padding: 11px 12px; border: 1px solid #cbd5e1;
+  border-radius: 8px; font-size: 16px; background: white;
+}
+button {
+  margin-top: 14px; padding: 11px 16px; border: 0; border-radius: 8px;
+  background: #2563eb; color: white; font-size: 15px; cursor: pointer;
+}
+button:hover { background: #1d4ed8; }
+button.secondary { background: #64748b; }
+.result {
+  margin-top: 18px; padding: 14px; min-height: 48px;
+  background: #eff6ff; border-radius: 8px; line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 8px; }
+small { color: #64748b; }
+</style>
+</head>
+<body>
+  <main>
+    <h1>Bài 5. Đoán số may mắn</h1>
+    <p>Đoán số từ 1 đến 10. Máy cũng chọn ngẫu nhiên một số trong khoảng này.</p>
+    <label for="guess">Số bạn đoán (1–10)</label>
+<input id="guess" type="number" min="1" max="10" step="1" placeholder="Nhập số từ 1 đến 10">
+<button id="guessBtn">Đoán số</button>
+<div id="result" class="result" aria-live="polite">Chúc bạn may mắn!</div>
+  </main>
+  <script>
+const guessInput = document.getElementById('guess');
+const result = document.getElementById('result');
+
+document.getElementById('guessBtn').addEventListener('click', function () {
+  const value = guessInput.value.trim();
+  const guess = Number(value);
+
+  if (value === '' || !Number.isInteger(guess) || guess < 1 || guess > 10) {
+    result.textContent = 'Vui lòng nhập số nguyên từ 1 đến 10.';
+    return;
+  }
+
+  const secret = Math.floor(Math.random() * 10) + 1;
+  if (guess === secret) {
+    result.textContent = 'Bạn đoán đúng số ' + secret + '! Bạn thắng rồi!';
+  } else {
+    result.textContent = 'Số của máy là ' + secret + '. Bạn chưa may mắn, hãy thử lại!';
+  }
+});
+  </script>
+</body>
+</html>
